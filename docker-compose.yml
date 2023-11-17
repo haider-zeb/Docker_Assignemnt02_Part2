@@ -1,0 +1,36 @@
+version: "1.1"
+services:
+  web:
+   # will build ./docker/web/Dockerfile
+    build: ./docker/web
+      # context: contextPath
+      # dockerfile: Dockerfile
+    ports:
+      - "2010:2010"
+
+  db:
+  # will build ./docker/db/Dockerfile
+    build: ./docker/db
+    image: "mysql"
+    ports: 
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqlpassword
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+    - ./prometheus_data:/prometheus
+
+    #networks:
+     # - localprom
+    ports:
+      - "9090:9090"
+#networks:
+ # localprom:
+  #  driver: bridge   
+  helloworldapp:
+    image: haiderali956/helloworldapp

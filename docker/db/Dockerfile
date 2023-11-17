@@ -1,0 +1,7 @@
+FROM mysql
+
+ENV MYSQL_ROOT_PASSWORD mysqlpassword
+
+EXPOSE 3306
+
+COPY . .
